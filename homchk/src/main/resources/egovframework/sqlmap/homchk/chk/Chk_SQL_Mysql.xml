@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Chk">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<select id="ChkDAO.selectChkList" resultClass="egovMap">
+		SELECT SEQ
+		     , CHK_CN
+		     , SORT_NO
+		  FROM tb_chklist
+		 ORDER BY SORT_NO
+	</select>
+
+	<insert id="ChkDAO.insertChkList">
+		INSERT INTO tb_chklist
+			(CHK_CN, SORT_NO)
+		VALUES
+			( #chkCn#, #sortNo#)
+	</insert>
+	<insert id="ChkDAO.updateChkList">
+		UPDATE tb_chklist
+		   SET CHK_CN = #chkCn#
+		     , SORT_NO = #sortNo#
+		 WHERE SEQ = #seq#
+	</insert>
+
+	<delete id="ChkDAO.deleteAllChkList">
+		DELETE FROM tb_chklist
+	</delete>
+
+	<delete id="ChkDAO.deleteChkList">
+		DELETE FROM tb_chklist
+		 WHERE SEQ = #seq#
+	</delete>
+
+
+</sqlMap>

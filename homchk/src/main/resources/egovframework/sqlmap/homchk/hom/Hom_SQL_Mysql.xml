@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Hom">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+
+	<select id="HomDAO.selectHomeResult" resultClass="egovMap">
+		SELECT SEQ
+		     , B_NM
+		     , T_AREA
+		     , O_AREA
+		     , G_AMT
+		     , M_AMT
+		     , ROOM
+		     , TOILET
+		     , MEMO
+		     , ATCH_FILE_ID
+		     , CHK_LIST_ID
+		     , C_DATE
+		  FROM tb_hom
+		 WHERE SEQ = #seq#
+	</select>
+
+	<select id="HomDAO.selectHomeList" parameterClass="String" resultClass="egovMap">
+		SELECT SEQ
+		     , B_NM
+		     , T_AREA
+		     , O_AREA
+		     , G_AMT
+		     , M_AMT
+		     , ROOM
+		     , TOILET
+		     , IF(CHK_LIST_ID != '', LENGTH(CHK_LIST_ID) - LENGTH(REPLACE(CHK_LIST_ID, '^', ''))+1, 0) POINT
+		     , C_DATE
+		  FROM tb_hom
+		 <isEqual compareValue="1">
+		 	ORDER BY C_DATE DESC
+		 </isEqual>
+		 <isEqual compareValue="2">
+		 	ORDER BY POINT DESC
+		 </isEqual>
+		 <isEqual compareValue="3">
+		 	ORDER BY C_DATE DESC, POINT DESC
+		 </isEqual>
+	</select>
+
+	<insert id="HomDAO.insertHom">
+		 <![CDATA[
+		INSERT INTO tb_hom
+		(
+		  b_nm
+		, t_area
+		, o_area
+		, g_amt
+		, m_amt
+		, room
+		, toilet
+		, memo
+		, atch_file_id
+		, chk_list_id
+		, c_date
+		)VALUES(
+		  #bNm#
+		, #tArea#
+		, #oArea#
+		, #gAmt#
+		, #mAmt#
+		, #room#
+		, #toilet#
+		, #memo#
+		, #atchFileId#
+		, #chkListId#
+		, now()
+		)
+		 ]]>
+
+		<selectKey keyProperty="seq" resultClass="int">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+
+	<update id="HomDAO.updateHom">
+		UPDATE tb_hom
+		   SET b_nm = #bNm#
+		     , t_area = #tArea#
+			 , o_area = #oArea#
+			 , g_amt = #gAmt#
+			 , m_amt = #mAmt#
+			 , room = #room#
+			 , toilet = #toilet#
+			 , memo = #memo#
+			 , atch_file_id = #atchFileId#
+			 , chk_list_id = #chkListId#
+		WHERE SEQ = #seq#
+	</update>
+
+
+</sqlMap>
