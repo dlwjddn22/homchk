@@ -38,7 +38,11 @@ function fncGoAfterErrorPage(){
                 <td align="center"><table width="520" border="0" cellspacing="2" cellpadding="2">
                   <tr>
                     <td width="74" rowspan="2" align="center"><img src="<c:url value='/images/egovframework/com/cmm/danger.jpg' />" width="74" height="74" alt="경고이미지" /></td>
-                    <td width="399" align="left" class="lt_text2">데이터 처리 중 오류가 발생하였습니다. </td>
+                    <td width="399" align="left" class="lt_text2">
+                    	데이터 처리 중 오류가 발생하였습니다.
+                    	<br>
+                    	${exception.message}
+                    </td>
                   </tr>
                 </table>
                   <table width="500" border="0" cellspacing="2" cellpadding="2">
