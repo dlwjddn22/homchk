@@ -1,4 +1,4 @@
-# 집 구하기 (homchk)
+# Homegrab
 
 
 ## 개발환경
