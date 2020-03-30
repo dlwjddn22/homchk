@@ -28,7 +28,7 @@
 				<c:choose>
 					<c:when test="${empty result}">
 						<tr>
-							<th>체크리스트</th>
+							<th>체크리스트 1</th>
 							<td style="text-align:center">1</td>
 							<td>
 								<input type="hidden" name="" class="chkSeq" value="0">
